@@ -16,15 +16,16 @@
   padding: 10px;
   width: 100%;
   max-width: 200px;
+  min-height: 10vv;
 }
-@media (max-width: 767px){
-    .search-leftbar{
-        max-width: 100%;
-    } 
+@media (max-width: 767px) {
+  .search-leftbar {
+    max-width: 100%;
+  }
 }
 
-.search-leftbar input{
-    max-width: 100%;
+.search-leftbar input {
+  max-width: 100%;
 }
 
 .search-rightview {
@@ -36,4 +37,10 @@
 
 .loader {
   max-width: 100%;
+}
+
+.no-result {
+  padding: 20px;
+  text-align: center;
+  width: 100%;
 }

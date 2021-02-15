@@ -42,7 +42,7 @@ export default class Search extends Component {
       .split(".")
       .slice(0, -1)
       .join(".")
-      .replace(/\d{1,2}[\-|\.|\/]\d{1,2}[\-|\.|\/]\d{2,4}/g, "")
+      .replace(/\d{1,2}[\-]\d{1,2}[\-]\d{2,4}/g, "")
       .split("-")
       .join(" ");
   };
@@ -105,7 +105,11 @@ export default class Search extends Component {
         <ImageTile content={tile} key={index} />
       ));
 
-    return "No Result found. Please search with different keyword.";
+    return (
+      <div className="no-result">
+        No Result found. Please search with different keyword.
+      </div>
+    );
   };
 
   render() {
