@@ -1,0 +1,39 @@
+.search-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  .search-container {
+    flex-direction: column;
+  }
+}
+
+.search-leftbar {
+  background-color: #ccc;
+  padding: 10px;
+  width: 100%;
+  max-width: 200px;
+}
+@media (max-width: 767px){
+    .search-leftbar{
+        max-width: 100%;
+    } 
+}
+
+.search-leftbar input{
+    max-width: 100%;
+}
+
+.search-rightview {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.loader {
+  max-width: 100%;
+}
