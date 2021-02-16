@@ -17,24 +17,21 @@ export default class Search extends Component {
   }
 
   searchApi = () => {
-    // fetch(
-    //   `http://authoring.canvas8.com:8080/share/form-controller/reactive/service-search.jsp?query=${this.state.searchKey}`
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-
-    const filterData = testJson.filter(
-      (item) => item.name && item.name.includes(this.state.searchKey)
-    );
-    //console.log("filtered", filterData);
-    //const result = this.groupByN(3, testJson);
-    const result = this.groupByN(3, filterData);
-    this.setState({
-      searchResult: result,
-      isSearchLoading: false,
-    });
-    // });
+    fetch(
+      `https://api.allorigins.win/get?url=${encodeURIComponent(
+        "http://authoring.canvas8.com:8080/share/form-controller/reactive/service-search.jsp?query=" +
+          this.state.searchKey
+      )}`
+    )
+      .then((response) => response.json())
+      .then((resData) => {
+        const contentJSON = JSON.parse(resData.contents);
+        const result = this.groupByN(3, contentJSON.data);
+        this.setState({
+          searchResult: result,
+          isSearchLoading: false,
+        });
+      });
   };
 
   transformNameIntoSingle = (str) => {
@@ -50,16 +47,16 @@ export default class Search extends Component {
   transformObjectIntoSingle = (data) => {
     if (data && data.length > 0) {
       let newObj = { name: "" };
-      data.map(
-        (item, index) =>
-          // console.log("item", item);
-          (newObj = {
-            ...newObj,
-            [index]: item.imageUrl,
-            name: `${newObj.name} ${this.transformNameIntoSingle(item.name)}`,
-          })
-      );
-
+      data.map((item, index) => {
+        let imgKey = `imageUrl${index}`;
+        let nameKey = `name${index}`;
+        newObj = {
+          ...newObj,
+          [imgKey]: item.imageUrl,
+          [nameKey]: this.transformNameIntoSingle(item.name),
+        };
+      });
+      console.log("new",newObj)
       return newObj;
     }
   };
@@ -79,9 +76,11 @@ export default class Search extends Component {
   onSearch = (e) => {
     const input = e.target.value;
     const term = input.trim();
+
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
+
     if (term) {
       this.setState(
         {
@@ -113,7 +112,7 @@ export default class Search extends Component {
   };
 
   render() {
-    const { isSearchLoading } = this.state;
+    const { isSearchLoading, searchKey } = this.state;
     return (
       <div className="search-container">
         <div className="search-leftbar">
@@ -122,7 +121,7 @@ export default class Search extends Component {
             type="search"
             name="search"
             placeholder="Search here"
-            value={this.state.searchKey}
+            value={searchKey}
             onChange={this.onSearch}
           />
         </div>

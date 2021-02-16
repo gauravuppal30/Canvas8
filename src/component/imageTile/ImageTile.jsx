@@ -5,29 +5,35 @@ import "./image-tile.css";
 export default class ImageTile extends Component {
   render() {
     const { content } = this.props;
-    // console.log("------>", content);
+
     return (
       <div className="image-tile">
         <div className="main-image">
-          <img src={content[0]} alt={content.name} />
+          <img src={content.imageUrl0} alt={content.name} />
           <LazyLoadImage
-            alt={content.name}
-            src={content[0]} // use normal <img> attributes as props
+            alt={content.name0}
+            src={content.imageUrl0} // use normal <img> attributes as props
           />
         </div>
         <div className="side-image">
-          {content[1] && (
+          {content.imageUrl1 && (
             <div className="left-image">
-              <LazyLoadImage src={content[1]} alt={content.name} />
+              <LazyLoadImage src={content.imageUrl1} alt={content.name1} />
             </div>
           )}
-          {content[2] && (
+          {content.imageUrl2 && (
             <div className="right-image">
-              <LazyLoadImage src={content[2]} alt={content.name} />
+              <LazyLoadImage src={content.imageUrl2} alt={content.name2} />
             </div>
           )}
         </div>
-        <div className="image-title">{content.name}</div>
+        <div className="image-title">
+          <div className="heading">{content.name0}</div>
+          <div className="sub-heading">
+            {content.name1}{" "}
+            <span>{content.name2}</span>
+          </div>
+        </div>
       </div>
     );
   }

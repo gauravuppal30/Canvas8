@@ -16,7 +16,6 @@
   padding: 10px;
   width: 100%;
   max-width: 200px;
-  min-height: 10vv;
 }
 @media (max-width: 767px) {
   .search-leftbar {
@@ -37,6 +36,7 @@
 
 .loader {
   max-width: 100%;
+  margin: 0 auto;
 }
 
 .no-result {
