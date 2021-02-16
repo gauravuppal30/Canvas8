@@ -56,7 +56,6 @@ export default class Search extends Component {
           [nameKey]: this.transformNameIntoSingle(item.name),
         };
       });
-      console.log("new",newObj)
       return newObj;
     }
   };
